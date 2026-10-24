@@ -21,4 +21,4 @@ Octaver monofônico que gera uma oitava abaixo (sub) a partir do sinal, com trac
 - Para um som de sub grosso: Octave 0.8–1.0, Dry 0.4–0.6, Tone 1–2 kHz.
 - Para efeito subtil de engrossar: Octave 0.3–0.5, Dry 0.8–1.
 - Cuidado com sistemas que não reproduzem frequências muito graves; use fones de ouvido/monitores adequados.
-- Colocar o octaver **antes** de distorção/fuzz (por exemplo, antes do Simple Fuzz) para o tracking ser limpo.
+- Colocar o octaver **antes** de distorção/fuzz (por exemplo, antes do Sardinha Fuzz) para o tracking ser limpo.

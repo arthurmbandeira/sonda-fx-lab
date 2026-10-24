@@ -21,4 +21,4 @@ Monophonic octaver that generates a sub-octave by tracking the fundamental. Form
 - For a thick sub sound: Octave 0.8–1.0, Dry 0.4–0.6, Tone 1–2 kHz.
 - For a subtle thickening: Octave 0.3–0.5, Dry 0.8–1.
 - Be careful with systems that can't reproduce very low frequencies; use suitable headphones/monitors.
-- Put the octaver **before** distortion/fuzz (e.g. before Simple Fuzz) for cleaner tracking.
+- Put the octaver **before** distortion/fuzz (e.g. before Sardinha Fuzz) for cleaner tracking.

@@ -6,7 +6,7 @@ Plugins de efeitos de áudio feitos com [JUCE](https://juce.com) 8.0.4 (C++17, C
 
 | Plugin | Descrição |
 |---|---|
-| [Simple Fuzz](plugins/fuzz/README.pt.md) | Fuzz para guitarra/baixo com oversampling, modos Guitar/Bass e Mix. |
+| [Sardinha Fuzz](plugins/fuzz/README.pt.md) | Fuzz para guitarra/baixo com oversampling, modos Guitar/Bass e Mix. |
 | [Bass VI Octaver](plugins/octaver/README.pt.md) | Oitava abaixo (sub) com tracking monofônico, ideal para baixo/Bass VI. |
 
 Formatos: VST3, AU e Standalone (macOS, arm64 + x86_64, macOS 11+).
@@ -43,6 +43,6 @@ xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/*.vst3 ~/Library/Au
 
 ```
 CMakeLists.txt      projeto principal
-plugins/fuzz        Simple Fuzz
+plugins/fuzz        Sardinha Fuzz
 plugins/octaver     Bass VI Octaver
 ```

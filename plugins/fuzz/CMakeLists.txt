@@ -19,7 +19,7 @@ juce_add_plugin(SimpleFuzz
     PLUGIN_MANUFACTURER_CODE Fzlb
     PLUGIN_CODE Sfzz
     FORMATS VST3 AU Standalone
-    PRODUCT_NAME "Simple Fuzz"
+    PRODUCT_NAME "Sardinha Fuzz"
     AU_MAIN_TYPE kAudioUnitType_Effect
     IS_SYNTH FALSE
     NEEDS_MIDI_INPUT FALSE

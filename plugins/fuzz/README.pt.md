@@ -1,4 +1,4 @@
-# Simple Fuzz
+# Sardinha Fuzz
 
 [🇬🇧 English](README.md) | 🇧🇷 Português
 

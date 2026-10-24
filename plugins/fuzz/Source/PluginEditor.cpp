@@ -91,6 +91,48 @@ void TinKnobLookAndFeel::drawRotarySlider (juce::Graphics& g, int x, int y, int 
     g.fillPath (p, juce::AffineTransform::rotation (angle).translated (c.getCentre()));
 }
 
+void TinKnobLookAndFeel::drawToggleButton (juce::Graphics& g, juce::ToggleButton& b, bool, bool)
+{
+    const auto area = b.getLocalBounds().toFloat();
+    const bool bass = b.getToggleState();
+    const auto centre = area.getCentre();
+
+    g.setFont (juce::Font (juce::FontOptions ("Helvetica Neue", 13.0f, juce::Font::bold)));
+    auto left = area.withWidth (area.getWidth() * 0.5f - 26.0f);
+    auto right = area.withTrimmedLeft (area.getWidth() * 0.5f + 26.0f);
+    g.setColour (bass ? cream.withAlpha (0.45f) : cream);
+    g.drawText ("GUITAR", left, juce::Justification::centredRight);
+    g.setColour (bass ? cream : cream.withAlpha (0.45f));
+    g.drawText ("BASS", right, juce::Justification::centredLeft);
+
+    // chrome nut / base plate
+    const auto pivot = juce::Point<float> (centre.x, centre.y + 9.0f);
+    const auto nut = juce::Rectangle<float> (26.0f, 26.0f).withCentre (pivot);
+    g.setColour (juce::Colours::black.withAlpha (0.5f));
+    g.fillEllipse (nut.translated (1.0f, 2.0f));
+    g.setGradientFill (juce::ColourGradient (tinLight, nut.getTopLeft(), tinDark, nut.getBottomRight(), false));
+    g.fillEllipse (nut);
+    g.setColour (tinDark.darker (0.5f));
+    g.drawEllipse (nut, 1.0f);
+    g.setColour (tinDark.darker (0.3f));
+    g.fillEllipse (nut.reduced (7.0f));
+
+    // lever
+    const float angle = bass ? 0.75f : -0.75f;
+    const auto tip = pivot + juce::Point<float> (std::sin (angle), -std::cos (angle)) * 26.0f;
+    g.setColour (juce::Colours::black.withAlpha (0.4f));
+    g.drawLine ({ pivot.x + 1.5f, pivot.y + 2.0f, tip.x + 1.5f, tip.y + 2.0f }, 6.0f);
+    g.setColour (tinMid);
+    g.drawLine ({ pivot, tip }, 6.0f);
+    g.setColour (tinLight);
+    g.drawLine ({ pivot.x - 1.0f, pivot.y, tip.x - 1.0f, tip.y }, 2.0f);
+    const auto ball = juce::Rectangle<float> (12.0f, 12.0f).withCentre (tip);
+    g.setGradientFill (juce::ColourGradient (tinLight, ball.getTopLeft(), tinDark, ball.getBottomRight(), false));
+    g.fillEllipse (ball);
+    g.setColour (tinDark.darker (0.5f));
+    g.drawEllipse (ball, 1.0f);
+}
+
 FuzzEditor::FuzzEditor (FuzzProcessor& p)
     : AudioProcessorEditor (&p), fuzz (p)
 {
@@ -99,21 +141,16 @@ FuzzEditor::FuzzEditor (FuzzProcessor& p)
     addKnob (level, "level", "LEVEL", " dB");
     addKnob (mix,   "mix",   "MIX",   "");
 
-    modeBox.addItem ("GUITARRA", 1);
-    modeBox.addItem ("BAIXO", 2);
-    modeBox.setJustificationType (juce::Justification::centred);
-    modeBox.setColour (juce::ComboBox::backgroundColourId, labelBot);
-    modeBox.setColour (juce::ComboBox::textColourId, cream);
-    modeBox.setColour (juce::ComboBox::outlineColourId, cream);
-    modeBox.setColour (juce::ComboBox::arrowColourId, cream);
-    addAndMakeVisible (modeBox);
-    modeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment> (fuzz.apvts, "mode", modeBox);
+    modeSwitch.setLookAndFeel (&lnf);
+    addAndMakeVisible (modeSwitch);
+    modeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment> (fuzz.apvts, "mode", modeSwitch);
 
     setSize (560, 400);
 }
 
 FuzzEditor::~FuzzEditor()
 {
+    modeSwitch.setLookAndFeel (nullptr);
     for (auto* k : { &drive, &tone, &level, &mix })
         k->slider.setLookAndFeel (nullptr);
 }
@@ -145,7 +182,7 @@ void FuzzEditor::resized()
     for (auto* k : { &drive, &tone, &level, &mix })
         k->slider.setBounds (row.removeFromLeft (cw).withTrimmedTop (16));
 
-    modeBox.setBounds (getWidth() / 2 - 70, 166, 140, 26);
+    modeSwitch.setBounds (getWidth() / 2 - 110, 170, 220, 44);
 }
 
 void FuzzEditor::paint (juce::Graphics& g)
@@ -180,7 +217,7 @@ void FuzzEditor::paint (juce::Graphics& g)
     g.drawText ("SARDINHA FUZZ", top.removeFromTop (40.0f), juce::Justification::centred);
     g.setColour (redAccent);
     g.setFont (juce::Font (juce::FontOptions ("Georgia", 13.0f, juce::Font::italic)));
-    g.drawText ("distorcao em conserva  -  em oleo de overdrive", top.removeFromTop (18.0f), juce::Justification::centred);
+    g.drawText ("pickled distortion  -  packed in overdrive oil", top.removeFromTop (18.0f), juce::Justification::centred);
 
     // fish
     auto fishRow = top.removeFromTop (70.0f).reduced (30.0f, 8.0f);

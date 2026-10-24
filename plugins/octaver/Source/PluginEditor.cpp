@@ -128,10 +128,12 @@ void OctaverEditor::paint (juce::Graphics& g)
     g.fillRect (top.removeFromTop (4.0f).reduced (60.0f, 0.0f));
     g.setColour (ink.withAlpha (0.85f));
     g.setFont (juce::Font (juce::FontOptions ("Georgia", 13.0f, juce::Font::italic)));
-    g.drawText ("guitarra uma oitava abaixo", top.removeFromTop (22.0f), juce::Justification::centred);
+    g.drawText ("one octave down", top.removeFromTop (22.0f), juce::Justification::centred);
 
     g.setColour (ink);
     g.setFont (juce::Font (juce::FontOptions ("Helvetica Neue", 13.0f, juce::Font::bold)));
+    // titles sit above the knob scale ticks so the knob doesn't cover them
+    constexpr int titleOffset = 20;
     for (auto* k : { &octave, &dry, &tone, &level })
-        g.drawText (k->title, k->slider.getBounds().withHeight (16).translated (0, -4), juce::Justification::centred);
+        g.drawText (k->title, k->slider.getBounds().withHeight (16).translated (0, -titleOffset), juce::Justification::centred);
 }
