@@ -1,22 +1,24 @@
 # Simple Fuzz
 
-Fuzz com oversampling para guitarra e baixo. Formatos: VST3, AU, Standalone.
+🇬🇧 English | [🇧🇷 Português](README.pt.md)
 
-## Parâmetros
+Oversampled fuzz for guitar and bass. Formats: VST3, AU, Standalone.
 
-| Parâmetro | Gama | Padrão | Função |
+## Parameters
+
+| Parameter | Range | Default | Function |
 |---|---|---|---|
-| Drive | 0–40 dB | 20 dB | Quantidade de ganho/saturação antes do clipping. |
-| Tone | 500–12000 Hz | 4000 Hz | Frequência de corte do filtro de tom (mais baixo = mais escuro). |
-| Level | −24 a +6 dB | −12 dB | Volume de saída. |
-| Mode | Guitar / Bass | Guitar | *Bass* preserva os graves (crossover a 200 Hz) para não perder corpo. |
-| Mix | 0–1 | 1 | Balanço seco/molhado. |
+| Drive | 0–40 dB | 20 dB | Amount of gain/saturation before clipping. |
+| Tone | 500–12000 Hz | 4000 Hz | Tone filter cutoff (lower = darker). |
+| Level | −24 to +6 dB | −12 dB | Output volume. |
+| Mode | Guitar / Bass | Guitar | *Bass* preserves the low end (200 Hz crossover) so you don't lose body. |
+| Mix | 0–1 | 1 | Dry/wet balance. |
 
-## Dicas
+## Tips
 
-- **Guitarra:** modo *Guitar*, Drive 20–30 dB, Tone ~3–5 kHz. Baixar Tone para suavizar o brilho agressivo.
-- **Baixo:** modo *Bass* e Mix 0.4–0.7 mantêm a definição do grave com sujidade por cima.
-- Como o Drive é forte, ajustar **Level** por último para igualar o volume com o sinal limpo (começar em −12 dB).
-- Colocar antes de reverb/delay e depois de afinador/compressor.
-- Colocar depois de um amp sim costuma soar pior; o fuzz prefere sinal direto.
-- Em pistas mono, o plugin funciona em stereo; usar um sinal sem clipping à entrada.
+- **Guitar:** *Guitar* mode, Drive 20–30 dB, Tone around 3–5 kHz. Lower Tone to tame harsh brightness.
+- **Bass:** *Bass* mode with Mix 0.4–0.7 keeps low-end definition with grit on top.
+- Drive is strong, so set **Level** last to match the clean signal's volume (start at −12 dB).
+- Place before reverb/delay and after tuner/compressor.
+- Placing it after an amp sim usually sounds worse; fuzz prefers a direct signal.
+- Avoid feeding it an already clipping input signal.
